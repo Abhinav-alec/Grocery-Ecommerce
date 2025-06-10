@@ -61,15 +61,15 @@ export const AppContextProvider = ({ children }) => {
   // Get Cart Total Amount
   const getCartAmount = () => {
     let totalAmount = 0;
-    for (const items in cartItems) {
-      let itemInfo = products.find((product) => product._id === items);
-      if (cartItems[items] > 0) {
-        totalAmount += itemInfo.offerPrice * cartItems[items];
+    for (const item in cartItems) {
+      const itemInfo = products.find((product) => product._id === item);
+      if (itemInfo && cartItems[item] > 0) {
+        totalAmount += itemInfo.offerPrice * cartItems[item];
       }
-      return Math.floor(totalAmount * 100) / 100; // Round to two decimal places
     }
-    return totalPrice;
+    return Math.floor(totalAmount * 100) / 100; // Round to two decimal places
   };
+
   useEffect(() => {
     fetchProducts();
   }, []);
